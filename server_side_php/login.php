@@ -15,17 +15,17 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     $gcm = new GCM();
 
     $res = $db->isUserExisted($email, $password);
-	
-	if($res == true){
+
+	$response["success"] = $res;
+
+	if($res > 0){
 		$user_info = $db->getUserInfo($email, $password);
-		$response["success"] = 1;
 		$response["message"] = json_encode($user_info);
 		echo json_encode($response);
 	}
 	else{
 		// required field is missing
-		$response["success"] = 0;
-		$response["message"] = "This email/password pair doesn't exist.";
+		$response["message"] = "changedd This $email-$password pair doesn't exist.";
 
 		// echoing JSON response
 		echo json_encode($response);

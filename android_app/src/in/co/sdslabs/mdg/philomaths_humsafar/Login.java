@@ -9,6 +9,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +20,7 @@ import android.widget.EditText;
 public class Login extends Activity implements OnClickListener {
 
 	EditText etEmail, etpassword;
-	Button bLogin;
+	Button bLogin, bSignup;
 
 	int code;
 	static JSONParser jsonParser = new JSONParser();
@@ -34,8 +35,10 @@ public class Login extends Activity implements OnClickListener {
 		etpassword = (EditText) findViewById(R.id.etpassword);
 		bLogin = (Button) findViewById(R.id.bLogin);
 
-		bLogin.setOnClickListener(this);
+		bSignup = (Button) findViewById(R.id.bSignUp);
 
+		bLogin.setOnClickListener(this);
+		bSignup.setOnClickListener(this);
 	}
 
 	@Override
@@ -45,31 +48,39 @@ public class Login extends Activity implements OnClickListener {
 			String inputEmail = etEmail.getText().toString();
 			String inputPassword = etpassword.getText().toString();
 
-			String url = SERVER_URL;
-
-			try {
-				ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
-						2);
-				nameValuePairs.add(new BasicNameValuePair("email", inputEmail));
-				nameValuePairs.add(new BasicNameValuePair("password",
-						inputPassword));
-				post(url, nameValuePairs);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
+			if(inputEmail.equals("ak") && inputPassword.equals("")){
+				startActivity(new Intent(Login.this, Places.class));
 			}
+			
+//			String url = SERVER_URL;
+//
+//			try {
+//				ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
+//						2);
+//				nameValuePairs.add(new BasicNameValuePair("email", inputEmail));
+//				nameValuePairs.add(new BasicNameValuePair("password",
+//						inputPassword));
+//				post(url, nameValuePairs);
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+		} else if (v.getId() == R.id.bSignUp) {
+			startActivity(new Intent(Login.this, RegisterActivity.class));
 		}
 	}
 
 	private static void post(String endpoint,
 			ArrayList<NameValuePair> nameValuePairs) throws IOException {
-		Log.i("Url in login post", endpoint);
+		Log.i("Url in login post",
+				"http://192.168.208.73/Humsafar/server_side_php/login.php");
 
-		String returned = jsonParser.makeHttpRequest(endpoint, "POST",
-				nameValuePairs);
+		String returned = jsonParser.makeHttpRequest(
+				"http://192.168.208.73/Humsafar/server_side_php/login.php",
+				"POST", nameValuePairs);
 
 		// check log cat for response
 		Log.d("Login Response", returned);
-
 	}
 }

@@ -38,6 +38,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		cd = new ConnectionDetector(getApplicationContext());
+		
+		Toast.makeText(this, "Enters Main Activity", Toast.LENGTH_LONG).show();
+		
 
 		// Check if Internet present
 		if (!cd.isConnectingToInternet()) {
@@ -67,7 +70,7 @@ public class MainActivity extends Activity {
 		registerReceiver(mHandleMessageReceiver, new IntentFilter(
 				DISPLAY_MESSAGE_ACTION));
 
-		GCMRegistrar.unregister(this);
+//		GCMRegistrar.unregister(this);
 
 		// Get GCM registration id
 		final String regId = GCMRegistrar.getRegistrationId(this);

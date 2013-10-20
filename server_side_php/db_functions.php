@@ -47,19 +47,22 @@ class DB_Functions {
     }
 
     public function isUserExisted($email, $password) {
-        $result = mysql_query("SELECT email from humsafar_users WHERE email = '$email' & $password = '$password'");
-        $no_of_rows = mysql_num_rows($result);
-        if ($no_of_rows > 0) {
+		$counter = 0;
+        $result = mysql_query("SELECT COUNT(*) as ".$counter ." from humsafar_users WHERE email = '$email' AND $password = '$password'");
+		
+		return $counter;
+		/*
+        if ($counter > 0) {
             // user existed
             return true;
         } else {
             // user not existed
             return false;
-        }
+        }*/
     }
 	
 	public function getUserInfo($email, $password) {
-		$result = mysql_query("SELECT `id`, `gcm_regid`, `email`, `name` from humsafar_users WHERE email = '$email' & $password = '$password'");
+		$result = mysql_query("SELECT `id`, `gcm_regid`, `email`, `name` from humsafar_users WHERE email = '$email' AND $password = '$password'");
 		return $result;
     }
 	
