@@ -46,8 +46,8 @@ class DB_Functions {
         return $result;
     }
 
-    public function isUserExisted($email) {
-        $result = mysql_query("SELECT email from humsafar_users WHERE email = '$email'");
+    public function isUserExisted($email, $password) {
+        $result = mysql_query("SELECT email from humsafar_users WHERE email = '$email' & $password = '$password'");
         $no_of_rows = mysql_num_rows($result);
         if ($no_of_rows > 0) {
             // user existed
@@ -56,6 +56,11 @@ class DB_Functions {
             // user not existed
             return false;
         }
+    }
+	
+	public function getUserInfo($email, $password) {
+		$result = mysql_query("SELECT `id`, `gcm_regid`, `email`, `name` from humsafar_users WHERE email = '$email' & $password = '$password'");
+		return $result;
     }
 
 }
