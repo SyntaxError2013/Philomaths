@@ -10,6 +10,8 @@ if (isset($_GET["regId"]) && isset($_GET["message"])) {
 
     $registatoin_ids = array($regId);
     $message = array("price" => $message);
+	
+	echo "Message = ".$message;
 
     $result = $gcm->send_notification($registatoin_ids, $message);
 
