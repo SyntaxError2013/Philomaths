@@ -32,7 +32,7 @@ if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["regId"])) {
 } else {
     // required field is missing
     $response["success"] = 0;
-    $response["message"] = "Required field(s) is missing";
+    $response["message"] = "Required field(s) is(are) missing";
 
     // echoing JSON response
     echo json_encode($response);
