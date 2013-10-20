@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS `humsafar_trips` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` INT,
+  `source` TEXT NOT NULL,
+  `destination` TEXT NOT NULL,
+  `departure_time` TIME NOT NULL,
+  `departure_date` DATE,
+  `relaxation_time` TIME NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
