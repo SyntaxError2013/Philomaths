@@ -1,4 +1,4 @@
-package in.co.sdslabs.presentation;
+package in.co.sdslabs.mdg.philomaths_humsafar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,19 +37,16 @@ public class Places extends Activity implements OnClickListener {
 		source = (AutoCompleteTextView) findViewById(R.id.source);
 		destination = (AutoCompleteTextView) findViewById(R.id.destination);
 		submit = (Button) findViewById(R.id.submit);
-		
-		sourceAdapter = new ArrayAdapter<String>(this,
-				R.layout.list_item);
-		destinationAdapter = new ArrayAdapter<String>(this,
-				R.layout.list_item);
-		
+
+		sourceAdapter = new ArrayAdapter<String>(this, R.layout.list_item);
+		destinationAdapter = new ArrayAdapter<String>(this, R.layout.list_item);
+
 		sourceAdapter.setNotifyOnChange(true);
 		destinationAdapter.setNotifyOnChange(true);
-		
+
 		source.setAdapter(sourceAdapter);
 		destination.setAdapter(destinationAdapter);
-		
-		
+
 		source.addTextChangedListener(new TextWatcher() {
 
 			public void onTextChanged(CharSequence s, int start, int before,
@@ -72,9 +69,7 @@ public class Places extends Activity implements OnClickListener {
 
 			}
 		});
-		
-		
-		
+
 		destination.addTextChangedListener(new TextWatcher() {
 
 			public void onTextChanged(CharSequence s, int start, int before,
@@ -83,7 +78,8 @@ public class Places extends Activity implements OnClickListener {
 					destinationAdapter.clear();
 					GetDestination getDestinationPlaces = new GetDestination();
 					// now pass the argument in the textview to the task
-					getDestinationPlaces.execute(destination.getText().toString());
+					getDestinationPlaces.execute(destination.getText()
+							.toString());
 				}
 			}
 
@@ -97,9 +93,9 @@ public class Places extends Activity implements OnClickListener {
 
 			}
 		});
-		
+
 		// date
-		
+
 		submit.setOnClickListener(this);
 
 	}
@@ -112,7 +108,6 @@ public class Places extends Activity implements OnClickListener {
 
 	}
 
-	
 	class GetSource extends AsyncTask<String, Void, ArrayList<String>> {
 
 		@Override
@@ -128,7 +123,8 @@ public class Places extends Activity implements OnClickListener {
 				Log.i("input", args[0]);
 				URL googlePlaces = new URL(
 				// URLEncoder.encode(url,"UTF-8");
-						"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + args[0] +"&sensor=false&key="+ apiKey);
+						"https://maps.googleapis.com/maps/api/place/autocomplete/json?input="
+								+ args[0] + "&sensor=false&key=" + apiKey);
 				URLConnection tc = googlePlaces.openConnection();
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						tc.getInputStream()));
@@ -187,14 +183,13 @@ public class Places extends Activity implements OnClickListener {
 
 			}
 
-			Log.d("YourApp",
-					"onPostExecute : autoCompleteAdapter" + sourceAdapter.getCount());
+			Log.d("YourApp", "onPostExecute : autoCompleteAdapter"
+					+ sourceAdapter.getCount());
 
 		}
 
 	}
-	
-	
+
 	class GetDestination extends AsyncTask<String, Void, ArrayList<String>> {
 
 		@Override
@@ -210,7 +205,8 @@ public class Places extends Activity implements OnClickListener {
 				Log.i("input", args[0]);
 				URL googlePlaces = new URL(
 				// URLEncoder.encode(url,"UTF-8");
-						"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + args[0] +"&sensor=false&key="+ apiKey);
+						"https://maps.googleapis.com/maps/api/place/autocomplete/json?input="
+								+ args[0] + "&sensor=false&key=" + apiKey);
 				URLConnection tc = googlePlaces.openConnection();
 				BufferedReader in = new BufferedReader(new InputStreamReader(
 						tc.getInputStream()));
@@ -255,8 +251,8 @@ public class Places extends Activity implements OnClickListener {
 
 			Log.d("YourApp", "onPostExecute : " + result.size());
 			// update the adapter
-			destinationAdapter = new ArrayAdapter<String>(getApplicationContext(),
-					R.layout.list_item);
+			destinationAdapter = new ArrayAdapter<String>(
+					getApplicationContext(), R.layout.list_item);
 			destinationAdapter.setNotifyOnChange(true);
 			// attach the adapter to textview
 			destination.setAdapter(destinationAdapter);
@@ -269,8 +265,8 @@ public class Places extends Activity implements OnClickListener {
 
 			}
 
-			Log.d("YourApp",
-					"onPostExecute : autoCompleteAdapter" + destinationAdapter.getCount());
+			Log.d("YourApp", "onPostExecute : autoCompleteAdapter"
+					+ destinationAdapter.getCount());
 
 		}
 

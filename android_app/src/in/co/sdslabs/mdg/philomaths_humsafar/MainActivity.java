@@ -67,20 +67,18 @@ public class MainActivity extends Activity {
 		registerReceiver(mHandleMessageReceiver, new IntentFilter(
 				DISPLAY_MESSAGE_ACTION));
 
-
 		GCMRegistrar.unregister(this);
-		
+
 		// Get GCM registration id
 		final String regId = GCMRegistrar.getRegistrationId(this);
 
-		
 		// Check if regid already presents
 		if (regId.equals("")) {
 			// Registration is not present, register now with GCM
 			GCMRegistrar.register(this, SENDER_ID);
 		} else {
 			// Device is already registered on GCM
-			
+
 			if (GCMRegistrar.isRegisteredOnServer(this)) {
 				// Skips registration.
 				Toast.makeText(getApplicationContext(),
@@ -150,5 +148,4 @@ public class MainActivity extends Activity {
 		}
 		super.onDestroy();
 	}
-
 }
