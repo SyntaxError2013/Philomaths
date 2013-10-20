@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `humsafar_users` (
   `email` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `password` varchar(50) NOT NULL,
-  `isOnline` INT,
+  `is_online` INT,
   `curr_lat` DOUBLE,
   `curr_long` DOUBLE,  
   PRIMARY KEY (`id`)
