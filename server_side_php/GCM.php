@@ -1,20 +1,14 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * Description of GCM
- *
- * @author Ravi Tamada
- */
 class GCM {
+
+    function __construct() {
+        
+    }
 
     public function send_notification($registatoin_ids, $message) {
         include_once './config.php';
-
         // Set POST variables
         $url = 'https://android.googleapis.com/gcm/send';
 
@@ -53,5 +47,4 @@ class GCM {
         echo $result;
     }
 }
-
 ?>

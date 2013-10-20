@@ -1,20 +1,33 @@
 <?php
-
-class DB_CONNECT {
-
-    function connect() {
-	
+ 
+class DB_Connect {
+ 
+    // constructor
+    function __construct() {
+ 
+    }
+ 
+    // destructor
+    function __destruct() {
+        $this->close();
+    }
+ 
+    // Connecting to database
+    public function connect() {
         require_once 'config.php';
-        $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die(mysql_error());
-        $db = mysql_select_db(DB_DATABASE) or die(mysql_error()) or die(mysql_error());
+        // connecting to mysql
+        $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+        // selecting database
+        mysql_select_db(DB_DATABASE);
 
-        // returing connection cursor
+        // return database handler
         return $con;
     }
-
-    function close() {
+ 
+    // Closing database connection
+    public function close() {
         mysql_close();
     }
-}
-
+ 
+} 
 ?>

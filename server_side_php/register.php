@@ -21,8 +21,20 @@ if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["regId"])) {
 
     $result = $gcm->send_notification($registatoin_ids, $message);
 
-    echo $result;
+	// successfully inserted into database
+	$response["success"] = 1;
+	$response["message"] = "Product successfully created.";
+
+	// echoing JSON response
+	echo json_encode($response);
+	
+    //echo $result;
 } else {
-	echo "user details missing";
+    // required field is missing
+    $response["success"] = 0;
+    $response["message"] = "Required field(s) is missing";
+
+    // echoing JSON response
+    echo json_encode($response);
 }
 ?>

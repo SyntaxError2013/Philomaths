@@ -1,5 +1,5 @@
 <?php
-	
+
 class DB_Functions {
 
     private $db;
@@ -9,18 +9,23 @@ class DB_Functions {
         // connecting to database
         $this->db = new DB_Connect();
         $this->db->connect();
-		
-		//$this->db_table = "humsafar";
-		// echo "table constructed ". "humsafar" ;
+		echo "Connection setup". $this->db->connect();
     }
 
-    public function createUser($name, $email, $gcm_regid) {
+    // destructor
+    function __destruct() {
+        
+    }
+
+    public function storeUser($name, $email, $gcm_regid) {
         // insert user into database
-        $result = mysql_query("INSERT INTO  " +  "humsafar" + " (name, email, gcm_regid, created_at) VALUES('$name', '$email', '$gcm_regid', NOW())");
+        $result = mysql_query("INSERT INTO gcm_users(name, email, gcm_regid, created_at) VALUES('$name', '$email', '$gcm_regid', NOW())");
         // check for successful store
         if ($result) {
+            // get user details
             $id = mysql_insert_id(); // last inserted id
-            $result = mysql_query("SELECT * FROM  " +  "humsafar" + "  WHERE id = $id") or die(mysql_error());
+            $result = mysql_query("SELECT * FROM gcm_users WHERE id = $id") or die(mysql_error());
+            // return user details
             if (mysql_num_rows($result) > 0) {
                 return mysql_fetch_array($result);
             } else {
@@ -31,29 +36,18 @@ class DB_Functions {
         }
     }
 
-    /**
-     * Get user by email and password
-     */
     public function getUserByEmail($email) {
-        $result = mysql_query("SELECT * FROM  " +  "humsafar" + "  WHERE email = '$email' LIMIT 1");
+        $result = mysql_query("SELECT * FROM gcm_users WHERE email = '$email' LIMIT 1");
         return $result;
     }
 
-    /**
-     * Getting all users
-     */
     public function getAllUsers() {
-		// echo "getAllUsers() is called";
-	
-        $result = mysql_query("SELECT * FROM  " +  "humsafar");
+        $result = mysql_query("select * FROM gcm_users");
         return $result;
     }
 
-    /**
-     * Check user is existed or not
-     */
-    public function doesUserExist($email) {
-        $result = mysql_query("SELECT email from  " +  "humsafar" + "  WHERE email = '$email'");
+    public function isUserExisted($email) {
+        $result = mysql_query("SELECT email from gcm_users WHERE email = '$email'");
         $no_of_rows = mysql_num_rows($result);
         if ($no_of_rows > 0) {
             // user existed
