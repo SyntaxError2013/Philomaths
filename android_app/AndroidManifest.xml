@@ -48,7 +48,7 @@
         </activity>
 
         <activity
-            android:name=".Places"
+            android:name=".NewTrip"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name" >
         </activity>
